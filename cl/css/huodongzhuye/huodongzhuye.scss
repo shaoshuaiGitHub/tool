@@ -1,0 +1,530 @@
+@function rem($px) {
+    @return ($px/288)*1rem
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB, WenQuanYi Micro Hei, Microsoft Yahei, sans-serif;
+    line-height: 1;
+    font-size: .14rem;
+}
+
+#app {
+    background-color: #F9EDE8;
+    background: -webkit-gradient(linear, 0 0, 0 50%, from(#FF6600), to(#F6F7F7));
+    background: -moz-linear-gradient(top, #FF6600, #F6F7F7 50%);
+    background: -o-linear-gradient(top, #FF6600 0%, #F6F7F7 50%);
+    background: -ms-linear-gradient(top, #FF6600 0%, #F6F7F7 50%);
+    background: linear-gradient(to bottom, #FF6600 0%, #F6F7F7 50%);
+}
+
+.all-content {
+    min-height: 100vh;
+    background: url('../../image/huodongzhuye1/bg.png') no-repeat;
+    background-size: rem(1080) rem(1063);
+    display: flex;
+    flex-direction: column;
+}
+
+// 好运名单
+.hao-yun {
+    width: rem(987);
+    height: rem(90);
+    margin: rem(284) auto 0;
+    padding: 0 rem(26);
+    background: rgba(0, 0, 0, .5);
+    border-radius: rem(10);
+    .i-gong-gao {
+        width: rem(42);
+        height: rem(37);
+        margin-right: rem(20);
+        vertical-align: middle;
+    }
+    span {
+        font-size: rem(37);
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #fff;
+        line-height: rem(90);
+        vertical-align: middle;
+    }
+    .ming-dan-num {
+        color: #FE5341;
+    }
+}
+
+// 收益
+.shou-yi {
+    width: rem(1018);
+    height: rem(411);
+    margin: rem(13) auto 0;
+    // background-color: orange;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: url('../../image/huodongzhuye1/tixian-bg.png') no-repeat;
+    background-size: 100% 100%;
+    .shou-left-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        top: 50%;
+        height: rem(210);
+        margin-left: rem(70);
+        .my-shou-yi {
+            margin-bottom: rem(75);
+            font-size: rem(50);
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #686868;
+        }
+        .shou-yi-num {
+            font-size: rem(80);
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #D73535;
+        }
+    }
+    .ti-xian-btn {
+        border-radius: rem(50);
+        background-color: #FEC605;
+        padding: rem(31) rem(65);
+        margin-right: rem(70);
+        font-size: rem(40);
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #8A4801;
+    }
+}
+
+//有福同享、签到共有样式
+.you-fu-img {
+    display: block;
+    margin: rem(50) auto 0;
+    width: rem(476);
+    height: rem(88);
+}
+
+.text-content {
+    margin: rem(45) auto 0;
+    width: rem(876);
+    // height: rem(261);
+    background: #FFF1C2;
+    box-shadow: 0px 0px .052rem 0px rgba(169, 169, 169, 0.14);
+    border-radius: rem(10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .desc {
+        margin-top: rem(66);
+        font-size: rem(50);
+        font-family: FZZhengHeiS-EB-GB;
+        font-weight: 600;
+        color: #EF5057;
+    }
+    .date {
+        margin-top: rem(50);
+        font-size: rem(35);
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #3E3E3E
+    }
+}
+
+.yq-btn {
+    border: none;
+    outline: none;
+    position: relative;
+    display: block;
+    outline-style: none;
+    margin: rem(40) auto 0;
+    width: rem(850);
+    height: rem(110);
+    background: #FEC605;
+    box-shadow: 0 rem(10) 0 0 rgba(213, 91, 2, 1);
+    border-radius: .191rem;
+    text-align: center;
+    line-height: rem(110);
+    font-size: rem(47);
+    font-family: Helvetica;
+    font-weight: bold;
+    color: rgba(138, 72, 1, 1);
+    letter-spacing: rem(8);
+}
+
+// 签到
+.qian-dao {
+    width: rem(994);
+    min-height: rem(816);
+    margin: rem(71) auto 0;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px 0px rgba(169, 169, 169, 0.14);
+    border-radius: rem(28);
+    .desc {
+        margin-top: rem(46);
+    }
+    .date {
+        margin-top: rem(42);
+    }
+    .red-box {
+        margin: rem(48) auto;
+        .each-box {
+            display: block;
+            display: flex;
+            float: left;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 rem(24);
+            // 未开启的红包
+            .red-pack-box {
+                width: rem(124);
+                height: rem(124);
+                background-color: #F0F0F0;
+                border-radius: 50%;
+                position: relative;
+                .i-red {
+                    width: rem(67);
+                    height: rem(67);
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    margin: auto;
+                }
+            }
+            // 开启后的红包
+            .active-red-pack-box {
+                width: rem(124);
+                height: rem(124);
+                background-color: #FBCC4A;
+                border-radius: 50%;
+                text-align: center;
+                .i-red-line {
+                    margin-top: rem(18);
+                    width: rem(60);
+                    height: rem(60);
+                }
+                .red-line-t {
+                    font-size: rem(20);
+                    font-family: PingFang SC;
+                    font-weight: bold;
+                    color: #FF6C00;
+                }
+            }
+            .day {
+                margin-top: rem(26);
+                font-size: rem(27);
+                font-family: PingFang SC;
+                font-weight: bold;
+                color: #868484;
+            }
+        }
+    }
+    .qd-btn {
+        margin-bottom: rem(50);
+    }
+}
+
+// 有福同享
+.you-fu {
+    width: rem(994);
+    min-height: rem(646);
+    margin: rem(70) auto 0;
+    background: #fff;
+    box-shadow: 0px 0px 15px 0px rgba(169, 169, 169, 0.14);
+    border-radius: rem(28);
+    .date {
+        margin-bottom: rem(66);
+    }
+}
+
+// 侧滑卡片
+.touche-card {
+    margin: rem(84) auto 0;
+    // border: 1px solid rgba(213, 91, 2, 1);
+    padding: rem(10) rem(8) rem(5) rem(0);
+    width: rem(1000);
+    height: rem(360);
+    overflow: hidden;
+    // background-color: #3E3E3E;
+    .slider {
+        display: block;
+        width: rem(2000);
+        height: rem(340);
+        transition: all 0.5s;
+        li {
+            float: left;
+            width: rem(500);
+            height: rem(340);
+            position: relative;
+            .s-img {
+                width: 100%;
+                height: 100%;
+            }
+            .slider-conent {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                // text-align: center;
+                .s-title {
+                    margin: rem(84) auto 0;
+                    font-size: rem(45);
+                    font-family: PingFang SC;
+                    font-weight: bold;
+                    color: #fff;
+                }
+                .s-con {
+                    margin: rem(55) auto 0;
+                    width: rem(370);
+                    font-size: rem(40);
+                    font-family: PingFang SC;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
+        }
+        li:last-of-type {
+            height: rem(343);
+        }
+    }
+}
+
+// 排行榜title
+.pai-hang-title {
+    width: rem(967);
+    height: rem(130);
+    margin: rem(92) rem(60) 0 rem(32);
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.pai-hang-content {
+    width: rem(1000);
+    max-height: rem(1258);
+    margin: rem(83) auto rem(65);
+    background: linear-gradient(39deg, #F6F7F7, #EFF4FD);
+    box-shadow: 0px 0px rem(15) 0px rgba(152, 152, 152, 0.35);
+    border-radius: rem(24);
+    .tab-header {
+        height: rem(127);
+        padding: auto rem(90);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .header-c {
+            position: relative;
+            width: rem(500);
+            text-align: center;
+            line-height: rem(127);
+            font-size: rem(45);
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #676767;
+        }
+        .header-c::after {
+            content: "";
+            position: absolute;
+            /*关键点： 该元素行对定位于 li*/
+            left: 50%;
+            bottom: -1px;
+            width: 60%;
+            opacity: 0;
+            border-bottom: 2px solid #FF6C00;
+            transform: translate(-50%) scaleX(0)
+        }
+        .active {
+            color: #000;
+        }
+        .active::after {
+            transition: .2s ease-in-out;
+            opacity: 1;
+            transform: translate(-50%) scaleX(1)
+        }
+    }
+    .tab-title {
+        margin-top: rem(21);
+        padding: 0 rem(67) 0 rem(93);
+        height: rem(100);
+        background: #F7F6F9;
+        // box-shadow: 0px 0px 2px 0px rgba(170, 165, 165, 0.32);
+        border-bottom: 2px solid #EFF4FD;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .tab-t-right {
+            width: rem(620);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+        div {
+            font-size: rem(37);
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #999999;
+        }
+    }
+    // tab-box
+    .tab-content {
+        overflow-y: scroll;
+        height: rem(900);
+        background-color: #F5F8F7;
+        padding: rem(33) 0 0;
+        .list-box {
+            border: 1px solid #EFF4FD;
+            // background: #F7F6F9;
+            background: RGBA(247, 247, 247, 1);
+            box-shadow: 0px 0px 2px 0px RGBA(239, 243, 255, 0.32);
+            border-radius: rem(10);
+            width: rem(945);
+            height: rem(160);
+            margin: rem(10) auto;
+            padding: 0 rem(40) 0 rem(85);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            .ph-box {
+                font-size: rem(37);
+                font-family: PingFang SC;
+                font-weight: bold;
+                color: #000;
+            }
+            .list-right {
+                width: rem(625);
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                .name-headpic {
+                    height: rem(76);
+                    font-size: rem(30);
+                    font-family: PingFang SC;
+                    font-weight: bold;
+                    color: #000;
+                    text-align: center;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    .header-pic {
+                        width: rem(76);
+                        height: rem(76);
+                        border-radius: 50%;
+                        margin-right: rem(29);
+                    }
+                }
+                .num {
+                    font-size: rem(40);
+                    font-family: PingFang SC;
+                    font-weight: bold;
+                    color: #000;
+                }
+            }
+        }
+    }
+    .tab-content::-webkit-scrollbar {
+        display: none;
+    }
+    .put {
+        height: rem(80);
+        text-align: center;
+        font-size: rem(37);
+        font-family: PingFang SC;
+        font-weight: bold;
+        line-height: rem(80);
+        color: rgba(94, 94, 94, 1);
+    }
+}
+
+
+/* 弹窗提示 */
+
+.mark {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.mark-content {
+    position: relative;
+    position: fixed;
+    height: rem(464);
+    width: rem(822);
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background-color: #fff;
+    z-index: 101;
+    border-radius: rem(10);
+    text-align: center;
+}
+
+.m-titel {
+    margin: rem(63) auto 0;
+    font-size: rem(50);
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #333333;
+    // line-height: rem(70);
+}
+
+.m-content {
+    width: rem(627);
+    margin: rem(77) auto 0;
+    font-size: rem(45);
+    font-family: PingFang SC;
+    font-weight: 400;
+    color: #333333;
+    line-height: rem(70);
+    text-align: left;
+}
+
+.m-btn {
+    position: absolute;
+    bottom: rem(53);
+    right: rem(52);
+    width: rem(387);
+    height: rem(42);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.m-btn .mb {
+    font-size: rem(45);
+    font-family: Source Han Sans CN;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.cancle-b {
+    color: #999999;
+}
+
+.sure-b {
+    color: #2688CF;
+}

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximun-scale=1.0,user-scalable=no">
+    <title>提现</title>
+    <link rel="stylesheet" href="./css/tixian/tixian.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- 头部输入框 -->
+        <div class="head">
+            <!-- 金额 -->
+            <div class="t-title">
+                <div class="t-title-left">金额</div>
+                <div class="t-title-right" @click="jiluEvent">提现记录</div>
+            </div>
+            <!-- 输入框 -->
+            <div class="t-input">
+                <div class="i-input-left">
+                    <span>￥</span><input type="number" v-model='inputValue' placeholder="请输入提现金额">
+                </div>
+                <img class="right-clear" src="./image/tixian/i-clear.png" alt="xx" @click="clearInput">
+            </div>
+            <div class="t-real">
+                实际到账金额：
+                <span v-if="inputValue">¥{{inputValue*0.99}}</span>
+                <span v-else class="un-active">以输入金额为准</span>
+            </div>
+            <div class="lines"></div>
+            <div class="t-ke">
+                <div class="t-ke-left">
+                    可提现金额：¥{{canGetMoeny}}
+                </div>
+                <div class="t-ke-right" @click="allgetEvent">全部提现</div>
+            </div>
+        </div>
+        <!-- 中间选择框 -->
+        <div class="middle">
+            <div class="yu-e middle-box">
+                <div class="yu-e-left middle-box-left">
+                    <img src="./image/tixian/i-money.png" alt="xx">
+                    <span>提现到余额</span>
+                </div>
+                <div class="yu-e-right middle-box-right">
+                    <input class="check-box" ref="check_box1" type="radio" name="getWay" v-model="getWay" value="1" checked>
+                    <img class="o-circle" src="./image/tixian/o-circle.png" alt="xxx">
+                    <img class="r-circle" src="./image/tixian/r-circle.png" alt="xx">
+                </div>
+            </div>
+            <div class="lines"></div>
+            <div class="to-bank middle-box">
+                <div class="yu-e-left middle-box-left">
+                    <img src="./image/tixian/i-card.png" alt="xx">
+                    <span>提现到银行卡</span>
+                </div>
+                <div class="yu-e-right middle-box-right">
+                    <input class="check-box" ref="check_box2" type="radio" name="getWay" v-model="getWay" value="2" @change="changeEvent">
+                    <img class="o-circle" src="./image/tixian/o-circle.png" alt="xxx">
+                    <img class="r-circle" src="./image/tixian/r-circle.png" alt="xx">
+                </div>
+            </div>
+            <template v-if="cardMsg.cardNumber">
+                <div class="lines"></div>
+                <div class="bank-type middle-box">
+                    <div class="card-icon">
+                        <img :src="cardMsg.cardPic != '' ? cardMsg.cardPic : mCardPic " alt="xx">
+                        <span class="card-name">{{cardMsg.cardName}}({{cardMsg.cardNumber}})</span>
+                    </div>
+                    <div class="geng-huan" @click="changeCard">
+                        更换
+                    </div>
+                </div>
+            </template>
+        </div>
+        <!-- 底部框 -->
+        <div class="footer">
+            <div class="f-title">提现说明</div>
+            <p>每月最多提现<span class="num-active">5</span>次</p>
+            <p>单笔最低<span class="num-active">10</span>元，最高<span class="num-active">10000</span>元</p>
+            <p>提现到余额不收取任何费率</p>
+            <p>提现到银行卡需要费率：<span class="num-active">0.10%</span>笔银行付费款</p>
+        </div>
+        <!-- 提现按钮 -->
+        <div class="bottom-btn" @click="txEvent">
+            <img src="./image/tixian/btn-bg.png" alt="xx">
+            <p class="ti-text">提现</p>
+        </div>
+        <!-- 弹窗 -->
+        <div class="mark" v-if="successMark || psMark || bankMark" @click="cancelMark"></div>
+        <!-- 提现成功 -->
+        <div class="success-mark-content" v-if="successMark">
+            <img class="clear-btn" src="./image/tixian/i-clear-b.png" alt="xx" @click="cancelMark">
+            <img class="success-img" src="./image/tixian/i-success.png" alt="xx">
+            <p class="success-t">提现成功</p>
+            <p class="success-c">红包提现成功，余额金额已增加！</p>
+            <div class="success-btn" @click="cancelMark">确认</div>
+        </div>
+        <!-- 输入密码 -->
+        <div class="password-mark-content" v-if="psMark">
+            <img class="clear-box" src="./image/tixian/i-clear-b.png" alt="xx" @click="cancelMark">
+            <p class="ti-shi">请输入支付密码</p>
+            <p class="ti-xian-t">提现</p>
+            <p class="ti-xian-money">￥90.00</p>
+            <div class="ps-content">
+                <input class="password-box" type="number" name="password" maxlength="6" v-model="msg">
+                <ul class="pwd-wrap">
+                    <li><i v-if="msg.length > 0"></i></li>
+                    <li><i v-if="msg.length > 1"></i></li>
+                    <li><i v-if="msg.length > 2"></i></li>
+                    <li><i v-if="msg.length > 3"></i></li>
+                    <li><i v-if="msg.length > 4"></i></li>
+                    <li><i v-if="msg.length > 5"></i></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 银行列表 -->
+        <div class="bank-list-content" ref="bankLt">
+            <div class="head-btn-box">
+                <span class="cancelBankBtn" @click="cancelMark">取消</span>
+                <span class="sureBankBtn" @click="slectSubmit">确定</span>
+            </div>
+            <div class="lines"></div>
+            <div class="bank-scorll-list">
+                <ul>
+                    <li v-for="(item,index) in bankList" :key="index" @click="slectEvent(index,item)">
+                        <div class="bank-msg">
+                            <div class="left-b-box">
+                                <img class='bank-icon' :src="item.bankIcon" alt="xx">
+                                <span class="bank-name">{{item.bankName}}（尾号{{item.bankNumber}}）</span>
+                            </div>
+                            <img v-if="curr == index" class="is-checked" src="./image/tixian/icon-checked.png" alt="xx">
+                            <div v-else class="un-checked"></div>
+                        </div>
+                        <div class="lines"></div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="./js/dom.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                inputValue: null, //输入金额
+                // realGetMoeny: null,
+                canGetMoeny: 120, //可提现金额
+                getWay: 1, //提现方式
+                // cardMsg: {}, //已绑定的提现银行卡
+                cardMsg: {
+                    cardNumber: 1973,
+                    cardName: "建设银行",
+                    cardPic: ""
+                },
+                mCardPic: './image/tixian/i-card.png', //默认银行卡icon
+                successMark: false, //提现弹窗
+                psMark: false, //密码弹窗
+                bankMark: false, //银行列表
+                msg: '', //密码
+                bankList: [{
+                        bankIcon: './image/tixian/i-card.png',
+                        bankName: '建设银行',
+                        bankNumber: '1354',
+                        isSlected: false
+                    }, {
+                        bankIcon: './image/tixian/i-card.png',
+                        bankName: '农业银行',
+                        bankNumber: '2254',
+                        isSlected: false
+                    }, {
+                        bankIcon: './image/tixian/i-card.png',
+                        bankName: '中国银行',
+                        bankNumber: '9954',
+                        isSlected: true
+                    },
+
+                ],
+                curr: null,
+                currBank: null
+            },
+            created() {
+
+            },
+            watch: {
+                msg(curVal) {
+                    this.msg = curVal
+                    if (/[^\d]/g.test(curVal)) {
+                        this.msg = this.msg.replace(/[^\d]/g, '');
+                    } else {
+                        this.msg = curVal;
+                    }
+                    if (this.msg.length == 6) {
+                        this.submitF();
+                    }
+                }
+            },
+            methods: {
+                // 提现记录
+                jiluEvent() {
+                    location.href = "./tixianjilu.html"
+                },
+                // 清楚输入
+                clearInput() {
+                    this.inputValue = null;
+                },
+                // 全部提现
+                allgetEvent() {
+                    this.inputValue = this.canGetMoeny;
+                },
+                // 提现
+                txEvent() {
+                    if (this.getWay == 1) {
+                        this.successMark = true;
+                    }
+                    if (this.getWay == 2) {
+                        this.msg = '';
+                        this.psMark = true;
+                    }
+                },
+                // 到银行卡
+                changeEvent() {
+
+                },
+                // 撤销弹窗
+                cancelMark() {
+                    let bankC = this.$refs.bankLt.style.height = '0';
+                    this.successMark = false;
+                    this.psMark = false;
+                    this.bankMark = false;
+                },
+                // 提交密码
+                submitF() {
+                    if (1) {
+                        alert('密码输入不正确');
+                        // this.psMark = false;
+                        this.msg = '';
+                    }
+                },
+                //方案B 软键盘 回车确认提交密码
+                // keypEvent(e) {
+                //     if (this.psMark == true && e.keyCode === 13) {
+                //         //keyCode === 13 软键盘上的回车键
+                //         this.psMark = false;
+                //     }
+                // }
+                // 更换绑定银行弹窗
+                changeCard() {
+                    let that = this;
+                    let bankC = that.$refs.bankLt.style.height = '2.84rem';
+                    that.bankMark = true;
+                },
+                //银行切换
+                slectEvent(i, col) {
+                    this.curr = i;
+                    this.currBank = col;
+                },
+                //银行切换确认
+                slectSubmit() {
+                    console.log(this.currBank)
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

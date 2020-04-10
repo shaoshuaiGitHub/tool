@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+body {
+  font-family: Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB, WenQuanYi Micro Hei, Microsoft Yahei, sans-serif;
+  line-height: 1;
+  font-size: .14rem;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #F2F2F2;
+}
+
+.lines {
+  height: 1px;
+  background-color: #E6E5E5;
+  width: 3.625rem;
+  margin: 0 auto;
+}
+
+.lines2 {
+  height: 2px;
+  background-color: #fff;
+  width: 100%;
+  margin: 0;
+}
+
+.tab-content {
+  margin-top: 0.10417rem;
+  background-color: #F2F2F2;
+}
+
+.tab-content .money-box {
+  height: 0.52083rem;
+  background-color: #fff;
+  padding: 0.19097rem 0.16667rem;
+}
+
+.tab-content .money-box .m-left {
+  float: left;
+}
+
+.tab-content .money-box .m-left .tl-1 {
+  color: #1F2020;
+  font-size: 0.14583rem;
+  font-family: PingFang SC;
+  font-weight: Medium;
+  vertical-align: middle;
+}
+
+.tab-content .money-box .m-left .tl-2 {
+  margin-left: 0.03472rem;
+  color: #999899;
+  font-size: 0.11111rem;
+  font-family: PingFang SC;
+  font-weight: Medium;
+  vertical-align: middle;
+}
+
+.tab-content .money-box .m-right {
+  float: right;
+  color: #1F2020;
+  font-size: 0.14583rem;
+  font-family: PingFang SC;
+  font-weight: bold;
+}
+
+.tab-content .month-content {
+  padding: 0 0.16667rem;
+  margin: auto 0;
+  font-size: 0.14583rem;
+  font-family: PingFang SC;
+  font-weight: Medium;
+  color: #FF6C00;
+}
+
+.tab-content .month-content .month-c-box {
+  width: 1.38889rem;
+  height: 0.34722rem;
+  line-height: 0.34722rem;
+}
+
+.tab-content .month-content .month-c-box .op-img {
+  margin-left: 0.03472rem;
+  width: 0.14583rem;
+  height: 0.08333rem;
+}
+
+.tab-content .list-content {
+  background-color: #fff;
+}
+
+.tab-content .list-content .mounth-money {
+  border-bottom: 1px solid #E6E5E5;
+}
+
+.tab-content .list-content .list-detail {
+  height: 3.07639rem;
+  overflow: scroll;
+}
+
+.tab-content .list-content .list-detail li:last-of-type .lines {
+  display: none;
+}
+
+.tab-content .list-content .list-detail .list-box {
+  padding: 0.11458rem 0.16667rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.tab-content .list-content .list-detail .list-box .list-box-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tab-content .list-content .list-detail .list-box .list-box-left img {
+  width: 0.17361rem;
+  height: 0.20833rem;
+  margin-right: 0.06944rem;
+}
+
+.tab-content .list-content .list-detail .list-box .list-box-left .lbl-qd .qd-box {
+  font-size: 0.14583rem;
+  font-family: PingFang SC;
+  font-weight: Medium;
+  color: #1F2020;
+}
+
+.tab-content .list-content .list-detail .list-box .list-box-left .lbl-qd .date-time-box {
+  margin-top: 0.06944rem;
+  font-size: 0.11111rem;
+  font-family: PingFang SC;
+  font-weight: Medium;
+  color: #999899;
+}
+
+.tab-content .list-content .list-detail .list-box .list-box-right .m-status {
+  text-align: center;
+  font-size: 0.14583rem;
+  font-family: PingFang SC;
+  font-weight: Medium;
+  color: #FF4948;
+}
+
+.tab-content .list-content .list-detail .list-box .list-box-right .m-content {
+  text-align: center;
+  margin-top: 0.05208rem;
+  font-size: 0.14583rem;
+  font-family: PingFang SC;
+  font-weight: Medium;
+  color: #999899;
+}

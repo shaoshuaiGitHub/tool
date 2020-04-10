@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximun-scale=1.0, user-scalable=no">
+    <title>有福同享</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        list-style: none;
+    }
+    
+    body {
+        font-family: Helvetica Neue, Helvetica, Roboto, Arial, sans-serif, PingFang-SC-Medium;
+        line-height: 1;
+        font-size: .14rem;
+    }
+    
+    #app {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #FF7C03;
+    }
+    /* 顶部推荐 */
+    
+    .header {
+        width: 100%;
+        height: 3.31rem;
+        background: url('./image/youfutongxiang/bg.png') no-repeat;
+        background-size: 100% 100%;
+    }
+    
+    .header .tui-jian {
+        margin: .753rem auto 0;
+        width: 3.09rem;
+        height: .316rem;
+    }
+    
+    .tui-jian img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .header .yong-hu {
+        margin: .163rem auto 0;
+        width: 2.243rem;
+        height: .264rem;
+        background: url('./image/youfutongxiang/red-box.png') no-repeat;
+        background-size: 100% 100%;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 1);
+        font-size: .128rem;
+        text-align: center;
+        line-height: .264rem;
+    }
+    
+    .header .date {
+        margin: .153rem auto 0;
+        width: 2.0rem;
+        height: .1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .date .date-time {
+        width: 1.6rem;
+        height: .1rem;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 1);
+        font-size: .128rem;
+        text-align: center;
+        line-height: .097rem;
+    }
+    
+    .t-icon-left,
+    .t-icon-right {
+        width: .176rem;
+        height: .015rem;
+    }
+    /* 中间邀请红包 */
+    
+    .middle {
+        margin: 0 auto;
+        width: 3.614rem;
+        height: 3.875rem;
+        background: url('./image/youfutongxiang/yq-jl-bg.png') no-repeat;
+        background-size: 100% 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .middle .moneny {
+        margin: .6rem auto 0;
+        font-size: .406rem;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: rgba(254, 65, 44, 1);
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+    }
+    
+    .middle .moneny span {
+        display: block;
+        font-size: .139rem;
+    }
+    
+    .middle .rule {
+        margin: .201rem auto 0;
+        font-size: .115rem;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: rgba(153, 153, 153, 1);
+    }
+    
+    .middle .decs {
+        margin: .288rem auto 0;
+        width: 2.275rem;
+        height: .132rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .decs .sui-ji {
+        width: 1.42rem;
+        height: .132rem;
+        font-size: .133rem;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: rgba(254, 65, 44, 1);
+        text-align: center;
+        line-height: .132rem;
+    }
+    
+    .decs .i-left,
+    .decs .i-right {
+        width: .302rem;
+        height: .059rem;
+    }
+    
+    .middle .red-pack {
+        margin: .225rem auto 0;
+    }
+    
+    .red-pack li {
+        display: block;
+        float: left;
+        margin: 0 .079rem;
+        text-align: center;
+    }
+    
+    .red-pack .red-icon {
+        width: .503rem;
+        height: .503rem;
+        border-radius: 50%;
+        background: rgba(240, 240, 240, 1);
+        position: relative;
+    }
+    
+    .red-icon img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        width: .295rem;
+        height: .288rem;
+    }
+    
+    .red-pack .red-num {
+        margin-top: .052rem;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: rgba(254, 65, 44, 1);
+        font-size: .111rem;
+    }
+    /* 邀请好友按钮 */
+    
+    .middle .frends-btn {
+        margin: .26rem auto 0;
+        width: 2.056rem;
+        height: .4rem;
+        border: none;
+        outline: none;
+        position: relative;
+        display: block;
+        outline-style: none;
+        background: rgba(254, 198, 5, 1);
+        box-shadow: 0 .03rem 0 0 rgba(213, 91, 2, 1);
+        border-radius: .2rem;
+        text-align: center;
+        line-height: .382rem;
+        font-size: .163rem;
+        font-family: Helvetica;
+        font-weight: bold;
+        color: rgba(138, 72, 1, 1);
+    }
+    
+    .frends-btn:active {
+        box-shadow: inset 0 .006rem .006rem rgba(0, 0, 0, .075), 0 0 .03rem rgba(102, 175, 233, .6)
+    }
+    
+    .middle .ti-shi {
+        font-size: .128rem;
+        color: #999999;
+        margin: .267rem auto 0;
+    }
+    
+    .middle .ti-shi .red-active {
+        color: #FE5341;
+    }
+    /* 底部邀请规则 */
+    
+    .footer {
+        margin: 0.278rem auto .6rem;
+        width: 3.614rem;
+        /* min-height: 2.064rem; */
+        position: relative;
+    }
+    
+    .footer .yq-rule-bg {
+        width: 100%;
+        height: 2.064rem;
+    }
+    
+    .footer .footer-content {
+        position: absolute;
+        width: 3.548rem;
+        padding: 0 .3rem .2rem;
+        top: .5rem;
+        left: 50%;
+        margin-left: -1.773rem;
+        background-color: #fff;
+        border-radius: 0 0 .08rem .08rem;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: rgba(153, 153, 153, 1);
+        font-size: .121rem;
+    }
+    
+    .footer-content p {
+        line-height: 180%;
+    }
+    /* 弹窗提示 */
+    
+    .mark {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+    }
+    
+    .mark-content {
+        position: relative;
+        position: fixed;
+        height: 1.61rem;
+        width: 2.854rem;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        background-color: #fff;
+        z-index: 101;
+        border-radius: .028rem;
+        text-align: center;
+    }
+    
+    .m-titel {
+        margin: .218rem auto 0;
+        font-size: .174rem;
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #333333;
+        line-height: .243rem;
+    }
+    
+    .m-content {
+        width: 2.277rem;
+        margin: .19rem auto 0;
+        font-size: .156rem;
+        font-family: PingFang SC;
+        font-weight: 400;
+        color: #333333;
+        line-height: .243rem;
+        text-align: left;
+    }
+    
+    .m-btn {
+        position: absolute;
+        bottom: .184rem;
+        right: .18rem;
+        width: 1.343rem;
+        height: .146rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .m-btn .mb {
+        font-size: .156rem;
+        font-family: Source Han Sans CN;
+        font-weight: 400;
+        cursor: pointer;
+    }
+    
+    .cancle-b {
+        color: #999999;
+    }
+    
+    .sure-b {
+        color: #2688CF;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- 顶部推荐 -->
+        <div class="header">
+            <div class="tui-jian"><img src="./image/youfutongxiang/tuijian-text.png" alt=""></div>
+            <div class="yong-hu">每个用户只能被邀请一次</div>
+            <div class="date">
+                <img class="t-icon-left" src="./image/youfutongxiang/icon-time-left.png" alt="">
+                <span class="date-time">{{activity.startTime}} - {{activity.endTime}}</span>
+                <img class="t-icon-right" src="./image/youfutongxiang/icon-time-right.png" alt="">
+            </div>
+        </div>
+        <!-- 中间邀请红包 -->
+        <div class="middle">
+            <!-- 金额 -->
+            <div class="moneny">{{dataSource.totalMaxMoney}}<span>元</span></div>
+            <!-- 红包存入收益 -->
+            <div class="rule">红包金额自动存入我的收益里面</div>
+            <!-- 随机获得大红包 -->
+            <div class="decs">
+                <img class="i-left" src="./image/youfutongxiang/icon-t.png" alt="">
+                <div class="sui-ji">有机会获得随机大红包</div>
+                <img class="i-right" src="./image/youfutongxiang/icon-t.png" alt="">
+            </div>
+            <!-- 随机红包列 -->
+            <div class="red-pack">
+                <ul>
+                    <li v-for="(item,index) in activityRuleList" :key="index">
+                        <div class="red-icon">
+                            <img src="./image/youfutongxiang/i-red-pack.png" alt="xx">
+                        </div>
+                        <div class="red-num">{{item.maxMoney}}</div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 邀请好友按钮 -->
+            <input class="frends-btn" type="button" value="邀请好友得现金" @click="yqEvent">
+            <!-- 好运名单 -->
+            <div class="ti-shi">
+                <span>好运名单：恭喜王**鸿运当头获得</span>
+                <span class="red-active">68.88</span>
+                <span>现金红包</span>
+            </div>
+        </div>
+        <!-- 底部邀请规则 -->
+        <div class="footer">
+            <img class="yq-rule-bg" src="./image/youfutongxiang/yq-hy-bg.png" alt="xx">
+            <div class="footer-content">
+                {{activity.description}}
+                <!-- <p>1、邀请新用户需要注册登录诚聊，点击签到成功才有效；</p>
+                <p>2、邀请新用户有机会获得0.68-668元现金红包； </p> 
+                <p>3、邀请新用户有效第1个获得5元红包，5个获得5元红包，更多玩法等你挖掘； </p>
+                <p>4、邀请新用户获得红包有时间限制，活动时间过后无效；</p>
+                <p>5、活动最终解释权归本公司所有</p> -->
+            </div>
+        </div>
+        <!-- 资格认证弹窗 -->
+        <div class="mark" v-if="ismark || ismarking" @click="clickWrapper">
+        </div>
+        <div class="mark-content" v-if="ismark">
+            <div class="m-titel">温馨提示</div>
+            <div class="m-content">您未达到参与活动的资格,点击立即申请!</div>
+            <div class="m-btn">
+                <span class="cancle-b mb" @click="clickWrapper">取消</span>
+                <span class="sure-b mb" @click="sumitApply">立即申请</span>
+            </div>
+        </div>
+        <div class="mark-content" v-if="ismarking">
+            <div class="m-titel">温馨提示</div>
+            <div class="m-content">您申请参与活动资格,正在审核中,请耐心等待哟,审核通过我们会及时通知您!</div>
+            <div class="m-btn">
+                <span class="cancle-b mb" @click="clickWrapper">取消</span>
+                <span class="sure-b mb" @click="clickWrapper">确认</span>
+            </div>
+        </div>
+    </div>
+    <script src="./js/dom.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                ismark: false, //申请遮罩弹窗
+                ismarking: false, //申请中遮罩弹窗
+                uid: null, //userId
+                dataSource: {}, //数据源
+                activity: {}, //数据 -活动信息
+                activityRuleList: {}, //数据-活动规则
+            },
+            created() {
+
+            },
+            mounted() {
+                this.activeFun();
+                this.getUid();
+            },
+            methods: {
+                // 获取页面参数
+                activeFun() {
+                    let that = this;
+                    axios({
+                            method: 'get',
+                            url: 'http://192.168.1.59:8092/activity/3',
+                        })
+                        .then(function(response) {
+                            if (response.data.resultCode == 1) {
+                                // console.log(response.data)
+                                that.dataSource = response.data.data;
+                                that.activity = response.data.data.activity;
+                                that.activityRuleList = response.data.data.activityRuleList;
+                                console.log(that.dataSource);
+                            }
+                        }).catch(error => {
+                            console.log(error)
+                        })
+                },
+                // 获取uid
+                getUid() {
+                    this.uid = _getLocationQuery();
+                },
+                //邀请点击事件
+                yqEvent() {
+                    if (this.activity.activityStatus == 1) {
+                        if (this.dataSource.hasLabelQualification2JoinActivity) {
+                            if (this.dataSource.judgmentInviteCondition) {
+                                if (this.dataSource.judgmentInviteUpperLimit) {
+                                    if (this.dataSource.hasQualification2InviteUser) {
+                                        window.location.href = "./fengxiang.html" + "?uid=" + this.uid;
+                                    } else if (this.dataSource.isUnderReview) {
+                                        this.ismarking = true;
+                                    } else {
+                                        this.ismark = true;
+                                    }
+                                } else {
+                                    _msgDialog("已达邀请奖励红包上限!")
+                                }
+                            } else {
+                                _msgDialog("不满足xx条件!")
+                            }
+                        } else {
+                            _msgDialog("用户等级不足!")
+                        }
+                    } else {
+                        _msgDialog("活动已关闭!")
+                    }
+                    // if (this.dataSource.labelFlag == 0) {
+                    //     this.ismark = true;
+                    // } else if (this.dataSource.labelFlag == 1) {
+                    //     this.ismarking = true;
+                    // } else {
+                    //     let curTime = new Date();
+                    //     let startTime = this.dataSource.activity.startTime.replace("-", "/");
+                    //     startTime = new Date(Date.parse(startTime));
+                    //     let endTime = this.dataSource.activity.endTime.replace("-", "/");
+                    //     endTime = new Date(Date.parse(endTime));
+                    //     if (curTime > endTime) {
+                    //         _msgDialog("活动已过期!")
+                    //     }
+                    //     if (curTime < startTime) {
+                    //         _msgDialog("活动未开始，敬请期待！")
+                    //     }
+                    //     window.location.href = "./fengxiang.html" + "?uid=" + this.uid;
+                    // }
+                },
+                // 点击遮罩层 撤掉弹窗
+                clickWrapper() {
+                    this.ismark = false;
+                },
+                // 资格认证
+                sumitApply() {
+                    let that = this;
+                    axios({
+                        method: 'post',
+                        url: 'http://192.168.1.59:8092/apply/applyAllowInviteFriend',
+                        data: {
+                            userId: that.uid
+                        }
+                    }).then(function(res) {
+                        if (res.data.resultCode == 1) {
+                            _msgDialog(res.data.resultMsg);
+                        } else {
+                            _msgDialog("申请失败，已有审核记录");
+                        }
+                        that.ismark = false;
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

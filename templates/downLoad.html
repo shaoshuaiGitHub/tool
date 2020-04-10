@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>下载页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body,
+        #app {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: url("../fenxiang/image/5db9582738ccf.jpg") no-repeat center;
+            background-size: 100% 100%;
+        }
+        
+        .btn-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            width: 2.2rem;
+            height: 1.2rem;
+            left: 50%;
+            top: 50%;
+            margin-top: .4rem;
+            margin-left: -1.1rem;
+        }
+        
+        .btn-box .btn1 {
+            margin-bottom: .2rem;
+            width: 2.0rem;
+            height: .45rem;
+            padding-right: .4rem;
+            border-radius: .05rem;
+            color: rgb(184, 28, 34);
+            font-family: Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+            font-size: .15rem;
+            text-align: right;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+            border: 0.2px solid rgb(240, 210, 58);
+            background-repeat: repeat;
+            background-size: auto;
+            background-origin: padding-box;
+            background-clip: padding-box;
+            background: url("image/iOS1.png") no-repeat .3rem .1rem;
+            background-size: 25px 25px;
+            background-color: rgba(240, 210, 58, 0.8);
+        }
+        
+        .btn-box .btn2 {
+            width: 2.0rem;
+            height: .45rem;
+            padding-right: .4rem;
+            border-radius: .05rem;
+            color: rgb(184, 28, 34);
+            font-family: Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+            font-size: .15rem;
+            text-align: right;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+            border: 0.2px solid #fff;
+            background-repeat: repeat;
+            background-size: auto;
+            background-origin: padding-box;
+            background-clip: padding-box;
+            background: url("image/Android1.png") no-repeat .3rem .1rem;
+            background-size: 25px 25px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="btn-box">
+                <button class="btn1">Android版下载</button>
+                <button class="btn2">iPhone版下载</button>
+            </div>
+        </div>
+    </div>
+    <script src="image/jquery-1.js"></script>
+    <script>
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+                };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+        var baseUrl = "http://47.98.131.135:8001/";
+        $(".btn1").click(function() {
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "sys/getVersion",
+
+                success: function(res) {
+                    if (res.errorCode === 1) {
+                        setTimeout(function() {
+                            $(location).attr('href', res.data.iosStore);
+                        }, 1200);
+                    } else {
+                        layui.use('layer', function() {
+                            var layer = layui.layer;
+                            layer.msg(res.msg, {
+                                time: 1500,
+                            });
+                        });
+                    }
+                },
+            })
+        })
+        $(".btn2").click(function() {
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "sys/getVersion",
+
+                success: function(res) {
+                    if (res.errorCode === 1) {
+                        setTimeout(function() {
+                            $(location).attr('href', res.data.androidStore);
+                        }, 1200);
+                    } else {
+                        layui.use('layer', function() {
+                            var layer = layui.layer;
+                            layer.msg(res.msg, {
+                                time: 1500,
+                            });
+                        });
+                    }
+                },
+            })
+        })
+    </script>
+</body>
+
+</html>

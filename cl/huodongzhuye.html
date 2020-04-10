@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximun-scale=1.0, user-scalable=no">
+    <title>活动主页</title>
+    <link rel="stylesheet" href="./css/huodongzhuye/huodongzhuye.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="all-content">
+            <!-- 好运名单 -->
+            <div class="hao-yun">
+                <img class="i-gong-gao" src="./image/huodongzhuye1/gonggao.png" alt="xx">
+                <span>好运名单：恭喜王**鸿运当头获得</span>
+                <span class="ming-dan-num">68.88 </span>
+                <span>现金红包</span>
+            </div>
+            <!-- 收益 -->
+            <div class="shou-yi">
+                <div class="shou-left-box">
+                    <div class="my-shou-yi">我的收益</div>
+                    <div class="shou-yi-num">¥00.00</div>
+                </div>
+                <div class="ti-xian-btn">去提现</div>
+            </div>
+            <!-- 签到 -->
+            <div class="qian-dao">
+                <img class="you-fu-img qian-dao-img" src="./image/huodongzhuye1/qian-dao.png" alt="xx">
+                <div class="text-content qd-content">
+                    <div class="desc">连续签有大的惊喜红包哦</div>
+                    <div class="date">活动时间：2020-03-03——2020-05-05</div>
+                    <div class="red-box">
+                        <ul>
+                            <li class="each-box">
+                                <div class="active-red-pack-box">
+                                    <img class="i-red-line" src="./image/huodongzhuye1/red-pack-line.png" alt="xxx">
+                                    <div class="red-line-t">¥8.88</div>
+                                </div>
+                                <div class="day">第1天</div>
+                            </li>
+                            <li class="each-box">
+                                <div class="active-red-pack-box">
+                                    <img class="i-red-line" src="./image/huodongzhuye1/red-pack-line.png" alt="xxx">
+                                    <div class="red-line-t">¥8.88</div>
+                                </div>
+                                <div class="day">第1天</div>
+                            </li>
+                            <li class="each-box">
+                                <div class="red-pack-box">
+                                    <img class="i-red" src="./image/huodongzhuye1/red-pack.png" alt="xx">
+                                </div>
+                                <div class="day">第1天</div>
+                            </li>
+                            <li class="each-box">
+                                <div class="red-pack-box">
+                                    <img class="i-red" src="./image/huodongzhuye1/red-pack.png" alt="xx">
+                                </div>
+                                <div class="day">第1天</div>
+                            </li>
+                            <li class="each-box">
+                                <div class="red-pack-box">
+                                    <img class="i-red" src="./image/huodongzhuye1/red-pack.png" alt="xx">
+                                </div>
+                                <div class="day">第1天</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <input class="yq-btn qd-btn" type="button" value="马上签到" @click="qdEvent">
+            </div>
+            <!-- 有福同享 -->
+            <div class="you-fu">
+                <img class="you-fu-img" src="./image/huodongzhuye1/you-fu.png" alt="xx">
+                <div class="text-content">
+                    <div class="desc">推荐好友拿现金红包</div>
+                    <div class="date">活动时间：2020-03-03——2020-05-05</div>
+                </div>
+                <input class="yq-btn" type="button" value="立即邀请" @click="yfEvent">
+            </div>
+            <!-- 侧滑卡片 -->
+            <div class="touche-card">
+                <ul class="slider" ref="slider_tou" @touchstart="touchstart" @touchmove="touchmove">
+                    <li v-for="(item,index) in imgSrc" :key="index" @click="cardEvent(index)">
+                        <img :src="item.src" class="s-img" />
+                        <div class="slider-conent">
+                            <div class="s-title">{{item.title}}</div>
+                            <div class="s-con">{{item.con}}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 排行榜title -->
+            <div class="pai-hang-title" id="paihang">
+                <img src="./image/huodongzhuye1/pai-hang.png" alt="xx">
+            </div>
+            <!-- 排行box -->
+            <div class="pai-hang-content">
+                <ul class="tab-header">
+                    <li class="header-c" v-for="(head,index) in tabHead" @click="cur=index" :class="{active:cur==index}">{{head}}</li>
+                </ul>
+                <div class="tab-title">
+                    <div>排名</div>
+                    <div class="tab-t-right">
+                        <div class='hd-text'>头像/名称</div>
+                        <div v-if="cur == 0" class='num-text'>邀请人数</div>
+                        <div v-else class='num-text'>个人收益</div>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <ul v-if="cur == 0">
+                        <li class="list-box" v-for="(item,index) in dataList1" :key="index">
+                            <div class="ph-box">{{item.ph}}</div>
+                            <div class="list-right">
+                                <div class="name-headpic">
+                                    <img class="header-pic" :src="item.headPic" alt="xx"> {{item.name}}
+                                </div>
+                                <div class="num">
+                                    {{item.yNumber}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul v-else>
+                        <li class="list-box" v-for="(item,index) in dataList2" :key="index">
+                            <div class="ph-box">{{item.ph}}</div>
+                            <div class="list-right">
+                                <div class="name-headpic">
+                                    <img class="header-pic" :src="item.headPic" alt="xx"> {{item.name}}
+                                </div>
+                                <div class="num">
+                                    {{item.yNumber}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="put">上拉加载更多</div>
+            </div>
+        </div>
+        <!-- 认证弹窗 -->
+        <div class="mark" v-if="ismark" @click="clickWrapper">
+        </div>
+        <div class="mark-content" v-if="ismark">
+            <div class="m-titel">温馨提示</div>
+            <div class="m-content">你还未实名认证，不能参与活动哦，点击前往实名认证！</div>
+            <div class="m-btn">
+                <span class="cancle-b mb" @click="clickWrapper">取消</span>
+                <span class="sure-b mb" @click="sumitReal">实名认证</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/dom.js"></script>
+<script src="./js/vue.min.js"></script>
+<script>
+    // let btn1 = document.getElementsByClassName('lj-yq')[0];
+    // btn1.addEventListener('click', function() {
+    //     window.location.href = "./youfutongxiang.html" + "?";
+    // }, false);
+    // let btn2 = document.getElementsByClassName('ms-qd')[0];
+    // btn2.addEventListener('click', function() {
+    //     if (machine == 'ios') {
+    //         window.webkit.messageHandlers.showSignPage.postMessage(null);
+    //     } else {
+    //         android.showSignPage();
+    //     }
+
+    // }, false);
+    new Vue({
+        el: "#app",
+        data: {
+            tabHead: ['邀请人数排行榜', '个人收益排行榜'],
+            cur: 0,
+            dataList1: [{
+                ph: '1',
+                headPic: './image/huodongzhuye/picture.png',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '张三',
+                yNumber: '666'
+            }],
+            dataList2: [{
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '李四',
+                yNumber: '¥888'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '李四',
+                yNumber: '¥888'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '李四',
+                yNumber: '¥888'
+            }, {
+                ph: '1',
+                headPic: '.././WX小程序/lianxi1/image/bt1.jpg',
+                name: '李四',
+                yNumber: '¥888'
+            }],
+            imgSrc: [{
+                    src: "./image/huodongzhuye1/banner-o.png",
+                    title: "诚友圈随机红包",
+                    con: "浏览诚友圈参与有红 包哦!"
+                }, {
+                    src: "./image/huodongzhuye1/banner-r.png",
+                    title: "在线时长随机红包",
+                    con: "每天线上时长领随机红 包哦!"
+                }, {
+                    src: "./image/huodongzhuye1/banner-b.png",
+                    title: "聊天随机红包",
+                    con: "与好友聊天互动有红 包哦!"
+                },
+
+            ],
+            startPointX: 0,
+            changePointX: 0,
+            showIndex: 0,
+            ismark: false
+        },
+        mounted() {
+
+        },
+        methods: {
+            //签到
+            qdEvent() {
+                if (machine == 'ios') {
+                    window.webkit.messageHandlers.showSignPage.postMessage(null);
+                } else {
+                    android.showSignPage();
+                }
+            },
+            // 邀请
+            yfEvent() {
+                if (false) {
+                    window.location.href = "./youfutongxiang.html" + "?";
+                } else {
+                    this.ismark = true;
+                }
+
+            },
+            // 卡片滑动
+            show(index) {
+                this.changePointX = this.startPointX;
+                let slider = this.$refs.slider_tou;
+                slider.style.marginLeft = `-${500/288*index}rem`;
+            },
+            touchstart(e) {
+                this.startPointX = e.changedTouches[0].pageX;
+            },
+            touchmove(e) {
+                if (this.startPointX == this.changePointX) {
+                    return;
+                }
+                let currPointX = e.changedTouches[0].pageX;
+                let leftSlide = this.startPointX - currPointX;
+                if (leftSlide > 30 && this.showIndex < this.imgSrc.length - 2) {
+                    this.show(++this.showIndex)
+                } else if (leftSlide < -30 && this.showIndex > 0) {
+                    this.show(--this.showIndex)
+                }
+            },
+            // 点击卡片
+            cardEvent(index) {
+                location.href = "./myshare.html"
+            },
+            // 点击遮罩层 撤掉弹窗
+            clickWrapper() {
+                this.ismark = false;
+            },
+            // 实名认证
+            sumitReal() {
+                console.log('认证')
+                if (machine == 'ios') {
+                    window.webkit.messageHandlers.showAuthPage.postMessage(null);
+                } else {
+                    android.showAuthPage();
+                }
+            }
+
+        },
+    })
+</script>
+
+</html>

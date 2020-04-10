@@ -1,0 +1,522 @@
+@function rem($px) {
+    @return ($px/288)*1rem
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB, WenQuanYi Micro Hei, Microsoft Yahei, sans-serif;
+    line-height: 1;
+    font-size: .14rem;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #F2F2F2;
+}
+
+.lines {
+    height: 1px;
+    width: 100%;
+    background-color: #F2F2F2;
+}
+
+// 头部输入框
+.head {
+    width: rem(1044);
+    min-height: rem(577);
+    margin: rem(30) auto;
+    padding: 0 rem(50);
+    background-color: #fff;
+    border-radius: rem(28);
+    // 金额
+    .t-title {
+        margin-top: rem(30);
+        height: rem(80);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .t-title-left {
+            font-size: rem(52);
+            font-family: PingFang SC;
+            font-weight: Medium;
+            color: #212121;
+        }
+        .t-title-right {
+            width: rem(220);
+            height: 100%;
+            background-color: #F2F2F2;
+            border-radius: rem(40);
+            font-size: rem(40);
+            font-family: PingFang SC;
+            font-weight: Medium;
+            color: rgba(33, 33, 33, .8);
+            text-align: center;
+            line-height: rem(80);
+        }
+    }
+    // 输入框
+    .t-input {
+        height: rem(80);
+        margin-top: rem(46);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .i-input-left {
+            font-size: rem(60);
+            font-family: PingFang SC;
+            font-weight: bold;
+            color: #212121;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            input::-webkit-input-placeholder {
+                color: #9C9C9C;
+                font-size: rem(55);
+                font-weight: normal;
+            }
+            input:-o-placeholder {
+                color: #9C9C9C;
+                font-size: rem(55);
+                font-weight: normal;
+            }
+            input::-moz-placeholder {
+                color: #9C9C9C;
+                font-size: rem(55);
+                font-weight: normal;
+            }
+            input:-ms-input-placeholder {
+                color: #9C9C9C;
+                font-size: rem(55);
+                font-weight: normal;
+            }
+            input {
+                width: rem(600);
+                height: rem(60);
+                font-size: rem(60);
+                font-family: PingFang SC;
+                font-weight: bold;
+                color: #212121;
+                border: none;
+                outline: none;
+            }
+        }
+        .right-clear {
+            width: rem(53);
+            height: rem(53);
+        }
+    }
+    // 实际到账
+    .t-real {
+        margin: rem(80) 0 rem(59);
+        font-size: rem(42);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #212121;
+        .un-active {
+            display: inline-block;
+            color: #aaa;
+            font-size: rem(42);
+            line-height: rem(42);
+            font-family: PingFang SC;
+            font-weight: Medium;
+        }
+    }
+    // 可提现
+    .t-ke {
+        margin-top: rem(60);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .t-ke-left {
+            font-size: rem(42);
+            font-family: PingFang SC;
+            font-weight: Medium;
+            color: #212121;
+        }
+        .t-ke-right {
+            font-size: rem(42);
+            font-family: PingFang SC;
+            font-weight: Medium;
+            color: #FF6C00;
+        }
+    }
+}
+
+// 中间选择框
+.middle {
+    min-height: rem(301);
+    margin-top: rem(30);
+    background-color: #fff;
+    .middle-box {
+        height: rem(150);
+        padding: 0 rem(48);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .middle-box-left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            img {
+                width: rem(57);
+                height: rem(59);
+                margin-right: rem(30);
+            }
+            span {
+                font-size: rem(42);
+                font-family: PingFang SC;
+                font-weight: Medium;
+                color: #212121;
+            }
+        }
+        .middle-box-right {
+            width: rem(400);
+            height: 100%;
+            position: relative;
+            .check-box {
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 2;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #fff;
+            }
+            .o-circle {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                margin-top: rem(-25);
+                width: rem(50);
+                height: rem(50);
+            }
+            .r-circle {
+                display: none;
+                position: absolute;
+                width: rem(30);
+                height: rem(30);
+                top: 50%;
+                margin-top: rem(-15);
+                right: rem(10);
+            }
+            input:checked~.r-circle {
+                display: inline-block;
+            }
+        }
+        //银行卡icon
+        .card-icon {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            img {
+                width: rem(60);
+                height: rem(60);
+                border-radius: 50%;
+                margin-right: rem(30);
+            }
+            .card-name {
+                font-size: rem(36);
+                font-family: PingFang SC;
+                font-weight: Medium;
+                color: #212121;
+            }
+        }
+        .geng-huan {
+            font-size: rem(36);
+            font-family: PingFang SC;
+            font-weight: Medium;
+            color: #FF6C00;
+        }
+    }
+}
+
+// 底部框
+.footer {
+    height: rem(428);
+    background-color: #fff;
+    padding: rem(50) rem(49);
+    margin-top: rem(30);
+    .f-title {
+        font-size: rem(42);
+        font-family: PingFang SC;
+        font-weight: bold;
+        color: #212121;
+        margin-bottom: rem(22);
+    }
+    p {
+        font-size: rem(36);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #666666;
+        line-height: 200%;
+        .num-active {
+            color: #FF6C00;
+        }
+    }
+}
+
+// 提现按钮
+.bottom-btn {
+    margin: rem(168) auto rem(80);
+    width: rem(984);
+    height: rem(120);
+    position: relative;
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    .ti-text {
+        width: rem(100);
+        height: rem(45);
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        font-size: rem(45);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #fff;
+    }
+}
+
+// 成功弹窗
+.mark {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 100;
+}
+
+.success-mark-content {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-top: rem(-797/2);
+    margin-left: rem(-846/2);
+    width: rem(846);
+    min-height: rem(797);
+    background-color: #fff;
+    border-radius: rem(10);
+    display: flex;
+    z-index: 101;
+    flex-direction: column;
+    .clear-btn {
+        position: absolute;
+        right: rem(47);
+        top: rem(45);
+        width: rem(40);
+        height: rem(40);
+    }
+    .success-img {
+        margin: rem(146) auto 0;
+        width: rem(124);
+        height: rem(124);
+    }
+    .success-t {
+        margin-top: rem(65);
+        text-align: center;
+        font-size: rem(60);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #020202;
+    }
+    .success-c {
+        margin-top: rem(54);
+        text-align: center;
+        font-size: rem(47);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #7A7A7A;
+    }
+    .success-btn {
+        margin: rem(91) auto rem(73);
+        width: rem(699);
+        height: rem(140);
+        background: #FF6C00;
+        border-radius: rem(10);
+        font-size: rem(53);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #FFFEFE;
+        text-align: center;
+        line-height: rem(140);
+    }
+}
+
+// 输入密码 弹窗
+.password-mark-content {
+    position: fixed;
+    width: rem(984);
+    min-height: rem(600);
+    background-color: #fff;
+    border-radius: rem(12);
+    left: 50%;
+    top: 50%;
+    margin-top: rem(-300);
+    margin-left: rem(-492);
+    z-index: 111;
+    display: flex;
+    flex-direction: column;
+    .clear-box {
+        position: absolute;
+        left: rem(30);
+        top: rem(40);
+        width: rem(34);
+        height: rem(34);
+    }
+    .ti-shi {
+        margin-top: rem(40);
+        text-align: center;
+        font-size: rem(45);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #666666;
+    }
+    .ti-xian-t {
+        margin-top: rem(70);
+        text-align: center;
+        font-size: rem(50);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #FF6C00;
+    }
+    .ti-xian-money {
+        margin-top: rem(49);
+        text-align: center;
+        font-size: rem(45);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #212121;
+    }
+    .ps-content {
+        position: relative;
+        margin: rem(100) auto rem(80);
+        width: rem(914);
+        height: rem(120);
+        .password-box {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            opacity: 0;
+        }
+        .pwd-wrap {
+            position: absolute;
+            width: rem(914);
+            height: rem(120);
+            background: url('../../image/tixian/pw-bg.png') no-repeat;
+            background-size: 100% 100%;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+            display: flex;
+            li {
+                list-style: none;
+                text-align: center;
+                line-height: rem(120);
+                flex: 1;
+                i {
+                    height: rem(20);
+                    width: rem(20);
+                    border-radius: 50%;
+                    background-color: #000;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+// 银行列表
+.bank-list-content {
+    position: fixed;
+    // height: rem(819);
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    z-index: 102;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    /*弹出时间*/
+    // 取消、确认
+    .head-btn-box {
+        padding: 0 rem(50);
+        height: rem(150);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        span {
+            font-size: rem(42);
+            font-family: Source Han Sans CN;
+            font-weight: 400;
+        }
+        .cancelBankBtn {
+            color: #666;
+        }
+        .sureBankBtn {
+            color: #FF6C00;
+        }
+    }
+    //银行滚动列表
+    .bank-scorll-list {
+        overflow-y: scroll;
+        height: rem(667);
+        .bank-msg {
+            height: rem(150);
+            padding: 0 rem(50);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .left-b-box {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 100%;
+                .bank-icon {
+                    width: rem(80);
+                    height: rem(80);
+                    margin-right: rem(74);
+                    border-radius: 50%;
+                }
+                .bank-name {
+                    font-size: rem(42);
+                    font-family: Source Han Sans CN;
+                    font-weight: 400;
+                    color: #212121;
+                }
+            }
+            .is-checked {
+                width: rem(43);
+                height: rem(33);
+            }
+            .un-checked {
+                width: rem(43);
+                height: rem(33);
+            }
+        }
+    }
+}

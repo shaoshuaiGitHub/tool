@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>邀请注册</title>
+    <link rel="stylesheet" href="./css/mui.min.css">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: Helvetica Neue, Helvetica, Roboto, Arial, sans-serif, PingFang-SC-Medium;
+        line-height: 1;
+        font-size: .14rem;
+    }
+    /* button默认样式 */
+    
+    .code-btn {
+        border: none;
+        outline: none;
+        position: relative;
+        display: inline-block;
+        text-align: center;
+        -webkit-box-shadow: 0 1px 0 rgba(102, 175, 233, .6);
+        box-shadow: 0 1px 0 rgba(102, 175, 233, .6);
+        -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+        transition: all .3s cubic-bezier(.645, .045, .355, 1);
+        cursor: pointer;
+    }
+    
+    .code-btn:active {
+        border-color: #66afe9;
+        outline: none;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        -ms-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        -o-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        -ms-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+        box-shadow: inset 0 2px 2px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+    }
+    /* input框默认提示样式 */
+    
+    .all-input::-webkit-input-placeholder {
+        color: #9C9C9C;
+        font-size: .125rem;
+    }
+    
+    .all-input:-o-placeholder {
+        color: #9C9C9C;
+        font-size: .125rem;
+    }
+    
+    .all-input::-moz-placeholder {
+        color: #9C9C9C;
+        font-size: .125rem;
+    }
+    
+    .all-input:-ms-input-placeholder {
+        color: #9C9C9C;
+        font-size: .125rem;
+    }
+    /* input框默认样式 */
+    
+    .all-input {
+        border: none;
+        outline: none;
+    }
+    
+    .all-input:focus {
+        border-color: #66afe9;
+        outline: none;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .6);
+        -ms-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .6);
+        -o-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .6);
+        -ms-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 4px rgba(102, 175, 233, .6)
+    }
+    /* app */
+    
+    #app {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #FFA900;
+    }
+    /* 头部header */
+    
+    .zc-header {
+        width: 100%;
+        height: 2.73rem;
+    }
+    
+    .zc-header img {
+        width: 100%;
+        height: 100%;
+    }
+    /* button box部分 */
+    
+    .zc-box {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        height: 2.7rem;
+        width: 100%;
+        padding: .18rem;
+        background: url('./image/zhuce/box.png') left top no-repeat;
+        background-size: 100% 100%;
+    }
+    /* 用户注册标题 */
+    
+    .zc-box .user-text {
+        margin: 0.21rem auto;
+        width: 2.88rem;
+        height: .19rem;
+    }
+    
+    .user-text img {
+        width: 100%;
+        height: 100%;
+    }
+    /* phone输入框 */
+    
+    .zc-box .phone {
+        width: 2.63rem;
+        height: .326rem;
+        margin: .069rem auto .132rem;
+    }
+    
+    .phone .tel-box {
+        width: 100%;
+        height: 100%;
+        outline-style: none;
+        border: 1px solid #ccc;
+        border-radius: .035rem;
+        padding: .09rem .096rem;
+        font-size: .125rem;
+        font-weight: 600;
+        font-family: "Microsoft soft";
+    }
+    /* 验证码 */
+    
+    .zc-box .code-box {
+        width: 2.63rem;
+        height: .326rem;
+        margin: 0 auto .246rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    /* 验证码输入框 */
+    
+    .code-box .code-num {
+        width: 1.48rem;
+        height: .33rem;
+        outline-style: none;
+        border: 1px solid #ccc;
+        border-radius: .035rem;
+        padding: .09rem .096rem;
+        font-size: .125rem;
+        font-weight: 600;
+        font-family: "Microsoft soft";
+    }
+    /* 验证码按钮 */
+    
+    .code-box .code-btn {
+        width: .96rem;
+        height: .33rem;
+        padding: auto .1rem;
+        font-size: .125rem;
+        font-weight: 400;
+        border-radius: .04rem;
+        color: rgba(256, 256, 256, 0.9);
+        border-color: #d9d9d9;
+        background-color: #FF5200;
+        box-shadow: none;
+    }
+    /* 验证码按钮失效 */
+    
+    .sented {
+        width: .96rem;
+        height: .33rem;
+        background-color: #9C9C9C;
+        padding: auto .1rem;
+        font-size: .125rem;
+        font-weight: 400;
+        border-radius: .4rem;
+        color: rgba(256, 256, 256, 0.9);
+        border-color: #d9d9d9;
+        box-shadow: none;
+        text-align: center;
+        line-height: .33rem;
+        cursor: pointer;
+    }
+    /* 注册按钮 */
+    
+    .zc-box .confirm {
+        width: 1.944rem;
+        height: .44rem;
+        margin: 0 auto;
+        padding: auto .1rem;
+        border-radius: .7rem;
+        border-color: #d9d9d9;
+        background: url('./image/zhuce/zhuce-btn.png') left top no-repeat;
+        background-size: 100% 100%;
+        /* transition: none; */
+    }
+    
+    .unsenet {
+        width: 1.944rem;
+        height: .44rem;
+        margin: 0 auto;
+        text-align: center;
+        line-height: .44rem;
+        border-radius: .8rem;
+        background-color: #9C9C9C;
+        font-size: .15rem;
+        font-weight: 300;
+        font-family: "Microsoft soft";
+        color: #fff;
+        box-shadow: inset 0px 0px 5px 10px rgba(0, 0, 0, .08);
+        letter-spacing: .01rem;
+    }
+    /* 简介*/
+    
+    .zc-footer {
+        width: 100%;
+        min-height: 2rem;
+        background: url('./image/zhuce/jianjie-box.png') left top no-repeat;
+        background-size: 100% 100%;
+        padding: .18rem;
+    }
+    /* 简介box */
+    
+    .jianjie-box {
+        margin: .566rem .2rem .2rem;
+    }
+    
+    .jianjie-box p,
+    .jianjie-box div {
+        line-height: 180%;
+        text-align: start;
+        color: #595959;
+        font-family: PingFang-SC-Bold;
+        font-weight: bold;
+        font-size: .125rem;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- 头部-新手注册 -->
+        <div class="zc-header">
+            <img src="./image/zhuce/bg.png" alt="zhuce">
+        </div>
+        <!-- 中间-用户注册-按钮总体部分 -->
+        <div class="zc-box">
+            <div class="user-text">
+                <img src="./image/zhuce/user-zhuce.png" alt="">
+            </div>
+            <div class="phone">
+                <input type="tel" placeholder="请输入手机号" v-model="phoneNum" oninput="if(value.length > 10)value=value.slice(0,11)" class="tel-box all-input" required>
+            </div>
+            <div class="code-box">
+                <input type="number" class="code-num all-input" placeholder="请输入验证码" v-model="codeNum" oninput="if(value.length > 5)value=value.slice(0,6)">
+                <div v-if="isSent" class="sented">{{waitTime+'s'}}</div>
+                <input v-else value="发送验证码" type="button" @click="sentCode" class="code-btn">
+            </div>
+            <div class="confirm code-btn" @click="confirmFun"></div>
+        </div>
+        <!-- 底部-简介 -->
+        <div class="zc-footer">
+            <div class="jianjie-box">
+                <div>诚聊APP--诚信商务聊天社交第一平台</div>
+                <p>诚聊，旨在为用户打造专业线上商务诚信聊天平台。 用户可以使用诚聊即时通讯工具加好友，与好友沟通， 创建群聊，发布朋友圈动态展示商品信息。</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/mui.min.js"></script>
+    <script src="./js/dom.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                isSent: false, // 验证码是否发送 
+                waitTime: 0, // 控制验证码发送动态时间
+                phoneNum: null, // phone输入值
+                codeNum: null, // 验证码输入值
+                telReg: /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/, //校验手机号正则
+                codeUrl: '/basic/randcode/sendSms', // 验证码请求-接口地址 
+                zhuceUrl: '/share/register', // 注册-接口地址
+                uid: null,
+                isSuccess: false,
+            },
+            created() {
+                this.getUid();
+            },
+            methods: {
+                // 获取uid
+                getUid() {
+                    this.uid = _getLocationQuery();
+                },
+                //发送证码
+                sentCode() {
+                    let that = this;
+                    that.waitTime = 60;
+                    if (!that.telReg.test(that.phoneNum)) {
+                        console.log(1)
+                        _msgDialog('请输入正确的手机号码');
+                        // this.$Message.warning("请输入正确手机号")
+                    } else {
+                        axios({
+                                method: 'get',
+                                url: baseUrl + that.codeUrl,
+                                params: {
+                                    telephone: that.phoneNum
+                                }
+                            })
+                            .then(function(response) {
+                                if (response.resultCode == 1) {
+                                    that.isSent = true;
+                                    that.isSuccess = true;
+                                    let timeOut = setInterval(() => {
+                                        that.waitTime--;
+                                        if (that.waitTime <= 0) {
+                                            that.isSent = false;
+                                            clearInterval(timeOut);
+                                        }
+                                    }, 1000)
+                                }
+                            }).catch(error => {
+                                console.log(error)
+                                _msgDialog('验证码发送失败');
+                            })
+                    }
+                },
+                //注册
+                confirmFun() {
+                    let that = this;
+                    if (!that.telReg.test(that.phoneNum)) {
+                        _msgDialog('请输入正确的手机号码');
+                        // this.$Message.warning("请输入正确手机号")
+                    } else {
+                        if (that.codeNum == null || that.codeNum.length <= 0) {
+                            _msgDialog('请输入验证码');
+                        } else if (that.codeNum.length > 0 && that.codeNum.length < 6) {
+                            _msgDialog('请输入正确的验证码');
+                        } else if (true) {
+                            axios({
+                                    method: 'post',
+                                    url: baseUrl + that.zhuceUrl,
+                                    header: {
+                                        'Content-Type': 'application/json;charset=UTF-8'
+                                    },
+                                    data: {
+                                        phone: that.phoneNum,
+                                        verificationCode: that.codeNum,
+                                        userId: that.uid
+                                    },
+                                })
+                                .then(function(response) {
+                                    console.log(response)
+                                    if (response.data.resultCode == 1) {
+                                        _msgDialog('注册成功');
+                                        that.isSuccess = false;
+                                        let timer = setInterval(() => {
+                                            window.location.href = '';
+                                            clearInterval(timer);
+                                        }, 1000)
+                                    } else {
+                                        _msgDialog(response.data.data.resultMsg)
+                                    }
+                                }).catch(error => {
+                                    console.log(error)
+                                })
+                        }
+                    }
+
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

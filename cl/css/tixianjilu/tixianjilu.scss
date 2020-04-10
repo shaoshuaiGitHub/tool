@@ -1,0 +1,179 @@
+@function rem($px) {
+    @return ($px/288)*1rem
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB, WenQuanYi Micro Hei, Microsoft Yahei, sans-serif;
+    line-height: 1;
+    font-size: .14rem;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #F2F2F2;
+}
+
+//  横线
+.lines {
+    height: 1px;
+    background-color: #E6E5E5;
+    width: rem(1044);
+    margin: 0 auto;
+}
+
+.lines2 {
+    height: 2px;
+    background-color: #fff;
+    width: 100%;
+    margin: 0;
+}
+
+//  t内容
+.tab-content {
+    margin-top: rem(30);
+    background-color: #F2F2F2;
+    //  总收入/月收入
+    .money-box {
+        height: rem(150);
+        background-color: #fff;
+        padding: rem(55) rem(48);
+        .m-left {
+            float: left;
+            .tl-1 {
+                color: #1F2020;
+                font-size: rem(42);
+                font-family: PingFang SC;
+                font-weight: Medium;
+                //  不同字体垂直对齐
+                vertical-align: middle;
+            }
+            .tl-2 {
+                margin-left: rem(10);
+                color: #999899;
+                font-size: rem(32);
+                font-family: PingFang SC;
+                font-weight: Medium;
+                vertical-align: middle;
+            }
+        }
+        .m-right {
+            float: right;
+            color: #1F2020;
+            font-size: rem(42);
+            font-family: PingFang SC;
+            font-weight: bold;
+        }
+    }
+    //  月份选择
+    .month-content {
+        padding: 0 rem(48);
+        margin: auto 0;
+        font-size: rem(42);
+        font-family: PingFang SC;
+        font-weight: Medium;
+        color: #FF6C00;
+        .month-c-box {
+            width: rem(400);
+            height: rem(100);
+            line-height: rem(100);
+            .op-img {
+                margin-left: rem(10);
+                width: rem(42);
+                height: rem(24);
+            }
+        }
+    }
+    //  收入详情
+    .list-content {
+        background-color: #fff;
+        .mounth-money {
+            border-bottom: 1px solid #E6E5E5;
+        }
+        .list-detail {
+            height: rem(886);
+            overflow: scroll;
+            li:last-of-type {
+                .lines {
+                    display: none;
+                }
+            }
+            .list-box {
+                padding: rem(33) rem(48);
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .list-box-left {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    img {
+                        width: rem(50);
+                        height: rem(60);
+                        margin-right: rem(20);
+                    }
+                    .lbl-qd {
+                        //  height: rem(84);
+                        .qd-box {
+                            font-size: rem(42);
+                            font-family: PingFang SC;
+                            font-weight: Medium;
+                            color: #1F2020;
+                        }
+                        .date-time-box {
+                            margin-top: rem(20);
+                            font-size: rem(32);
+                            font-family: PingFang SC;
+                            font-weight: Medium;
+                            color: #999899;
+                        }
+                    }
+                }
+                .list-box-right {
+                    .m-status {
+                        text-align: center;
+                        font-size: rem(42);
+                        font-family: PingFang SC;
+                        font-weight: Medium;
+                        color: #FF4948;
+                    }
+                    .m-content {
+                        text-align: center;
+                        margin-top: rem(15);
+                        font-size: rem(42);
+                        font-family: PingFang SC;
+                        font-weight: Medium;
+                        color: #999899;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//  .mark {
+//      width: 100%;
+//      height: 100%;
+//      position: fixed;
+//      left: 0;
+//      top: 0;
+//      background-color: rgba(9, 9, 9, 0.63);
+//      z-index: 100;
+//  }
+//  .mark-content {
+//      width: 100%;
+//      height: rem(637);
+//      position: fixed;
+//      left: 0;
+//      bottom: 0;
+//      background-color: #fff;
+//      z-index: 101;
+//  }

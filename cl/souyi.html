@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximun-scale=1.0,user-scalable=no">
+    <title>我的收益</title>
+    <link rel="stylesheet" href="./css/mui.min.css">
+    <link rel="stylesheet" href="./css/mui.picker.min.css">
+    <link rel="stylesheet" href="./css/souyi/souyi.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- 头部预计收益 -->
+        <div class="header">
+            <div class="yuji-t">预计收益</div>
+            <div class="yuji-money">{{100.01}}</div>
+        </div>
+        <!-- 中间可提现按钮 -->
+        <div class="middle">
+            <template v-for="(item,index) in txList">
+                <div class="ke-tixian" @click="txEvent(index)">
+                    <div class="tx-c-left">{{item.name}}</div>
+                    <div class="tx-c-right">
+                        <div class="tx-num">¥ {{item.number}}</div>
+                        <img class="rigth-nav" src="./image/wodesouyi/right-nav.png" alt="xx">
+                    </div>
+                </div>
+                <div class="lines"></div>
+            </template>
+        </div>
+        <!-- 邀请、红包tab -->
+        <div class="tab">
+            <ul class="tab-title">
+                <li v-for="(title,index) in tabTitle" @click="cur=index" :class="{active:cur==index}">{{title}}</li>
+            </ul>
+            <div class="tab-content">
+                <div v-for="(main,index) in tabMain" v-show="cur==index">
+                    <!-- 总收入 -->
+                    <div class="total-money money-box">
+                        <div class="m-left">
+                            <span class="tl-1">总收入 </span><span class="tl-2">(共{{main.toatalNum}}笔)</span>
+                        </div>
+                        <div class="m-right">
+                            ¥ <span>{{main.totalMoney}}</span>
+                        </div>
+                    </div>
+                    <!-- 月份选择 -->
+                    <div class="month-content">
+                        <div class="month-c-box" @click="chooseDate">
+                            <span class="mc-date">{{chooseValue}}</span>
+                            <img src="./image/wodesouyi/i-nav-down.png" alt="xx" class="op-img">
+                        </div>
+                    </div>
+                    <!-- 收入详情 -->
+                    <div class="list-content">
+                        <!-- 月份收入 -->
+                        <div class="mounth-money money-box">
+                            <div class="m-left">
+                                <span class="tl-1">收入 </span><span class="tl-2">(共{{main.toatalNum}}笔)</span>
+                            </div>
+                            <div class="m-right">
+                                ¥ <span>{{main.totalMoney}}</span>
+                            </div>
+                        </div>
+                        <!-- 收入详情列表 -->
+                        <div class="list-detail">
+                            <ul>
+                                <li v-for="(i,index) in main.redList">
+                                    <div class="list-box">
+                                        <!-- left-box -->
+                                        <div class="list-box-left">
+                                            <img src="./image/wodesouyi/red-pack.png" alt="xx">
+                                            <div class="lbl-qd">
+                                                <div class="qd-box">{{i.title}}</div>
+                                                <div class="date-time-box">{{i.date}}</div>
+                                            </div>
+                                        </div>
+                                        <!-- right-box -->
+                                        <div class="list-box-right">
+                                            <div class="m-status">{{i.status}}</div>
+                                            <div class="m-content">+{{i.money}}元</div>
+                                        </div>
+                                    </div>
+                                    <!-- 横线 -->
+                                    <div class="lines"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 遮罩层
+        <div class="mark" v-if="isChoose" @click="cancleMark">
+        </div>
+        <div class="mark-content" v-if="isChoose">
+
+        </div> -->
+    </div>
+    <script src="./js/dom.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/mui.min.js"></script>
+    <script src="./js/mui.picker.min.js"></script>
+    <script>
+        var dtPicker = new mui.DtPicker({
+            type: 'month'
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                txList: [{
+                    'name': '可提现',
+                    'number': 1000.01
+                }, {
+                    'name': '已提现',
+                    'number': 10000.01
+
+                }, {
+                    'name': '已失效',
+                    'number': 100000.01
+                }],
+                tabTitle: ['邀请收益', '红包收益'],
+                tabMain: [{
+                    toatalNum: 40,
+                    totalMoney: 10000.00,
+                    redList: [{
+                        title: '成功邀请王大锤获得红包',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: ''
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '成功邀请王大锤获得红包 拷贝',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }]
+                }, {
+                    toatalNum: 50,
+                    totalMoney: 11100.00,
+                    redList: [{
+                        title: '签到红包',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: ''
+                    }, {
+                        title: '签到红包',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '签到红包',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '签到红包',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }, {
+                        title: '签到红包',
+                        date: '2020-03-03 08:00:00',
+                        money: '10',
+                        status: '失效'
+                    }]
+                }],
+                cur: 0, //默认选中第一个tab
+                isChoose: false,
+                chooseValue: "全部"
+            },
+            mounted() {
+
+            },
+            methods: {
+                // 选择日期
+                chooseDate() {
+                    let that = this;
+                    dtPicker.show(function(selectItems) {
+                        // vm.$set(this.chooseValue, selectItems.value)
+                        that.chooseValue = selectItems.value;
+                    })
+                },
+                // 可提现
+                txEvent(index) {
+                    if (index == 1) {
+                        location.href = "./tixianjilu.html"
+                    }
+
+                }
+                // // 撤销弹窗
+                // cancleMark() {
+                //     this.isChoose = false;
+                // }
+            },
+        })
+    </script>
+
+</body>
+
+</html>

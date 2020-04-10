@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>实名认证</title>
+    <link rel="stylesheet" href="./css/iview.css">
+    <link rel="stylesheet" href="./../html5-svg-loading-animation/css/style.css" media="screen" type="text/css" />
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: Helvetica Neue, Helvetica, Roboto, Arial, sans-serif, PingFang-SC-Medium;
+        line-height: 1;
+        font-size: .14rem;
+    }
+    
+    #app {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #F6F5F8;
+    }
+    
+    .myForm {
+        background-color: #fff;
+    }
+    /* 身份证照片 */
+    
+    .idCard {
+        height: 1.5rem;
+        padding: .1rem;
+    }
+    
+    .idCard .cardImg-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .cardImg-box .img-content {
+        position: relative;
+        width: 1.6rem;
+        height: 1rem;
+        background-color: #F6FAFF;
+        text-align: center;
+        border-radius: .1rem;
+    }
+    
+    .img-content .i-camera {
+        position: absolute;
+        width: .416rem;
+        height: .416rem;
+        top: .125rem;
+        left: 50%;
+        margin-left: -.208rem;
+    }
+    
+    .img-content .text-box {
+        position: absolute;
+        width: 1.2rem;
+        text-align: center;
+        bottom: .153rem;
+        left: 50%;
+        margin-left: -.6rem;
+        font-size: .132rem;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: #5E5F61;
+    }
+    
+    .zheng-mian,
+    .fan-mian {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        /* font-size: .345rem; */
+        width: 1.6rem;
+        height: 100%;
+        /* line-height: 1rem; */
+    }
+    
+    .img-content .card-pic {
+        width: 100%;
+        height: 100%;
+        border-radius: .1rem;
+    }
+    
+    .lines {
+        height: 1px;
+        width: 100%;
+        background-color: #F6F5FA;
+    }
+    /* 输入框 */
+    
+    .input-box {
+        margin: .3rem 0 .1rem;
+        padding: 0 .208rem;
+    }
+    
+    .text-requied {
+        font-size: .152rem;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: #A3A3A3;
+    }
+    
+    .in-ipu {
+        width: 2rem;
+        height: .3rem;
+        border: none;
+        outline-style: none;
+        border-radius: .05rem;
+        font-size: .152rem;
+    }
+    
+    .t1 {
+        margin-right: .55rem;
+    }
+    
+    .t2 {
+        margin-right: .1rem;
+    }
+    
+    .idNum {
+        margin-bottom: .1rem;
+    }
+    
+    .in-ipu::placeholder {
+        color: #A3A3A3;
+        font-size: .125rem;
+    }
+    /* 提交按钮 */
+    
+    .submit {
+        /* height: 100%; */
+        background-color: #F6F5F8;
+    }
+    
+    .submit-btn {
+        margin: .243rem .1rem 0;
+        width: 3.55rem;
+        height: .4rem;
+        outline-style: none;
+        outline: none;
+        display: inline-block;
+        text-align: center;
+        transition: all .3s cubic-bezier(.645, .045, .355, 1);
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: .04rem;
+        background-color: #FF6C00;
+        font-size: .152rem;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: #fff;
+    }
+    /* 底部菜单 */
+    /* .mark {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(9, 9, 9, 0.63);
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+    }
+    
+    .mark .mark-content {
+        position: fixed;
+        padding: .1rem;
+        height: 2rem;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        z-index: 10001;
+        border-radius: .1rem;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .in-mark-box,
+    .in-mark-box2 {
+        height: .5rem;
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+        background-color: #fff;
+        border-radius: .08rem .08rem 0 0;
+    }
+    
+    .in-mark-box2 {
+        margin-top: .01rem;
+        border-radius: 0 0 .08rem .08rem;
+    }
+    
+    .mark-text {
+        width: 3.55rem;
+        font-size: .2rem;
+        color: #000;
+        text-align: center;
+        line-height: .5rem;
+    }
+    
+    .cancel-btn {
+        margin-top: .17rem;
+        height: .6rem;
+        width: 3.55rem;
+        background-color: #fff;
+        color: #000;
+        font-size: .2rem;
+        border-radius: .08rem;
+        text-align: center;
+        line-height: .6rem;
+    } */
+</style>
+
+<body>
+    <div id="app">
+        <form enctype="multipart/form-data" name="fileinfo" class="myForm">
+            <!-- 照片上传部分 -->
+            <div class="idCard">
+                <div class="cardImg-box">
+                    <div class="left-img img-content">
+                        <img class="card-pic" v-if="prePic" :src="prePic" alt="xx">
+                        <template v-else>
+                            <img src="./image/rengzheng/i-camera.png" alt="xx" class="i-camera">
+                            <p class="text-box">上传身份证正面照</p>
+                            <input @change="uploadFiles('zhen')" ref="input_btn1" accept="image/*" type="file" class="zheng-mian isos" />
+                        </template>
+                    </div>
+                    <div class="right-img img-content">
+                        <img v-if="naPic" class="card-pic" :src="naPic" alt="xxx">
+                        <template v-else>
+                            <img src="./image/rengzheng/i-camera.png" alt="xx" class="i-camera">
+                            <p class="text-box">上传身份证反面照</p>
+                            <input @change="uploadFiles('fan')" ref="input_btn2" accept="image/*" type="file" class="fan-mian isos" />
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <div class="lines"></div>
+            <!-- 输入姓名 -->
+            <div class="name input-box">
+                <span class="text-requied t1">姓名</span>
+                <input type="text" class="in-ipu" ref="input_name" placeholder="请输入您的姓名">
+            </div>
+            <div class="lines"></div>
+            <!-- 输入身份证号码 -->
+            <div class="idNum input-box">
+                <span class="text-requied t2">身份证号码</span>
+                <input type="email" class="in-ipu" ref="input_num" placeholder="请输入您的身份证号码">
+            </div>
+            <!-- 提交 -->
+            <div class="submit">
+                <input type="button" value="确认" class="submit-btn" @click="submitEvent">
+            </div>
+        </form>
+    </div>
+    <script src="./js/dom.js"></script>
+    <script src="./js/vue.min.js"></script>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                prePic: null, //正面照片
+                naPic: null, //反面照片
+                type: machine, // 手机类型
+                pic1: null,
+                pic2: null,
+                loading: false,
+            },
+            mounted() {},
+            methods: {
+                // IOS 对接方法
+                getNativeDataFunction(functionName, parm) {
+                    var payload = {
+                        "type": "JSbridge",
+                        "arguments": parm
+                    };
+                    return prompt(functionName, JSON.stringify(payload));
+                },
+                // 获取到图片
+                uploadFiles(col) {
+                    if (machine == "android") {
+                        if (col == 'zhen') {
+                            let img1 = this.$refs.input_btn1.files[0];
+                            this.prePic = img1;
+                            this.pic1 = img1;  
+                        } else {
+                            let img2 = this.$refs.input_btn2.files[0];
+                            this.naPic = img2;
+                            this.pic2 = img2;  
+                        }
+                    } else {
+                        if (col == 'zhen') {
+                            let img1 = this.$refs.input_btn1.files[0];
+                            this.prePic = window.URL.createObjectURL(img1);
+                            this.pic1 = img1;  
+                        } else {
+                            let img2 = this.$refs.input_btn2.files[0];
+                            this.naPic = window.URL.createObjectURL(img2);
+                            this.pic2 = img2;  
+                        }
+                    }
+
+                },
+                // 确认
+                submitEvent() {
+                    let params = {};
+                    let payload = {
+                        "type": "JSbridge",
+                        "functionName": "idAuth",
+                    }
+                    params.name = this.$refs.input_name.value;
+                    params.cardNum = this.$refs.input_num.value;
+                    params.pic1 = this.pic1;
+                    params.pic2 = this.pic2;
+                    payload.arguments = params;
+                    console.log(machine)
+                        // IOS
+                    if (machine == 'ios') {
+                        this.loading = true;
+                        let getmsg = prompt('idAuth', payload)
+                        this.loading = false;
+                        if (getmsg == 'yes') {
+                            this.$Message.success('认证成功');
+                            window.history.back(); //刷新上一页
+
+                        } else {
+                            this.$Message.success('认证失败');
+                        }
+                    }
+                    // android
+                    if (machine == 'android') {
+                        this.loading = true;
+
+                    }
+
+                },
+            }
+        })
+    </script>
+    <script src="./js/iview.min.js"></script>
+</body>
+
+</html>

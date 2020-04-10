@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>二维码</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .qrcode-bg {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .qrcode-bg-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        
+        .qrcode-bg-container img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="qrcode-bg">
+        <canvas id="myCanvas" width="540" height="960" style="display:none;">
+        </canvas>
+        <div class="qrcode-bg-container">
+        </div>
+    </div>
+    <script src="image/jquery-1.js"></script>
+    <script>
+        var imgPath =
+            './image/5db93da0ade2b.jpg';
+        $(document).ready(function() {
+            load(imgPath);
+        });
+
+        // 加载背景图
+        function load(imgPath) {
+            var baseUrl = "http://47.98.131.135:8001/";
+            var url = window.location.href;
+            var i = url.indexOf('?');
+            if (i == -1) return;
+            var querystr = url.split('?')[1];
+            var j = querystr.indexOf('&');
+            if (j == -1) {
+                uid = querystr.split('=')[1]
+            } else {
+                var query = querystr.split('&')[0]
+                var uid = query.split('=')[1];
+            };
+            var  qrcodePath  =  baseUrl + "sys/join/qrcode"  +  "?"  + "uid=" + uid;
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            var ratio = getPixelRatio(ctx);
+            canvas.width = 540 * ratio;
+            canvas.height = 960 * ratio;
+            ctx.translate(0.5, 0.5);
+            var img = new Image();
+            img.setAttribute("crossOrigin", 'anonymous');
+            img.src = imgPath;
+            img.onload = function() {
+                var iWidth = 540 * ratio;
+                var iHeight = 960 * ratio;
+                ctx.drawImage(img, 0, 0, iWidth, iHeight);
+                draw();
+            };
+
+            function draw() {
+                var qrcode = new Image();
+                qrcode.src = qrcodePath;
+                qrcode.setAttribute("crossOrigin", 'anonymous');
+                qrcode.onload = function() {
+                    var qWidth = 200 * ratio;
+                    var qHeight = 200 * ratio;
+                    // 设置水平对齐方式
+                    ctx.textAlign = "center";
+                    // 设置垂直对齐方式
+                    ctx.textBaseline = "middle";
+                    ctx.drawImage(qrcode, canvas.width / 2 - qWidth / 2, 590 * ratio, qWidth, qHeight);
+                    var newImg = new Image();
+                    newImg.src = canvas.toDataURL("image/png", 1);
+                    $(".qrcode-bg-container").html(newImg);
+                }
+            }
+        }
+
+        //getPixelRatio
+        function getPixelRatio(context) {
+            var backingStore = context.backingStorePixelRatio ||
+                context.webkitBackingStorePixelRatio ||
+                context.mozBackingStorePixelRatio ||
+                context.msBackingStorePixelRatio ||
+                context.oBackingStorePixelRatio ||
+                context.backingStorePixelRatio || 1;
+            return (window.devicePixelRatio || 1) / backingStore;
+        };
+    </script>
+</body>
+
+</html>
